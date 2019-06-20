@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlyznbxhf.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.zlyznbxhf.po.OrderDetail">
+    <id column="orderdetailid" jdbcType="INTEGER" property="orderdetailid" />
+    <result column="orderid" jdbcType="INTEGER" property="orderid" />
+    <result column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="productnum" jdbcType="INTEGER" property="productnum" />
+    <result column="productprice" jdbcType="DOUBLE" property="productprice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderdetailid, orderid, productid, productnum, productprice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderdetail
+    where orderdetailid = #{orderdetailid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderdetail
+    where orderdetailid = #{orderdetailid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlyznbxhf.po.OrderDetail">
+    insert into orderdetail (orderdetailid, orderid, productid, 
+      productnum, productprice)
+    values (#{orderdetailid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, 
+      #{productnum,jdbcType=INTEGER}, #{productprice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlyznbxhf.po.OrderDetail">
+    insert into orderdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderdetailid != null">
+        orderdetailid,
+      </if>
+      <if test="orderid != null">
+        orderid,
+      </if>
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="productnum != null">
+        productnum,
+      </if>
+      <if test="productprice != null">
+        productprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderdetailid != null">
+        #{orderdetailid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productnum != null">
+        #{productnum,jdbcType=INTEGER},
+      </if>
+      <if test="productprice != null">
+        #{productprice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlyznbxhf.po.OrderDetail">
+    update orderdetail
+    <set>
+      <if test="orderid != null">
+        orderid = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productnum != null">
+        productnum = #{productnum,jdbcType=INTEGER},
+      </if>
+      <if test="productprice != null">
+        productprice = #{productprice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where orderdetailid = #{orderdetailid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlyznbxhf.po.OrderDetail">
+    update orderdetail
+    set orderid = #{orderid,jdbcType=INTEGER},
+      productid = #{productid,jdbcType=INTEGER},
+      productnum = #{productnum,jdbcType=INTEGER},
+      productprice = #{productprice,jdbcType=DOUBLE}
+    where orderdetailid = #{orderdetailid,jdbcType=INTEGER}
+  </update>
+</mapper>

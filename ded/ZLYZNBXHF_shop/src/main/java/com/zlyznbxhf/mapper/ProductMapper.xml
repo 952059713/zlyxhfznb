@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlyznbxhf.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.zlyznbxhf.po.Product">
+    <id column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="productimg" jdbcType="VARCHAR" property="productimg" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="discount" jdbcType="DOUBLE" property="discount" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zlyznbxhf.po.Product">
+    <result column="productdetail" jdbcType="LONGVARCHAR" property="productdetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    productid, productname, productimg, price, discount, stock, sales
+  </sql>
+  <sql id="Blob_Column_List">
+    productdetail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where productid = #{productid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where productid = #{productid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlyznbxhf.po.Product">
+    insert into product (productid, productname, productimg, 
+      price, discount, stock, 
+      sales, productdetail)
+    values (#{productid,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, #{productimg,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, #{stock,jdbcType=INTEGER}, 
+      #{sales,jdbcType=INTEGER}, #{productdetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlyznbxhf.po.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="productimg != null">
+        productimg,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="productdetail != null">
+        productdetail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productimg != null">
+        #{productimg,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="productdetail != null">
+        #{productdetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlyznbxhf.po.Product">
+    update product
+    <set>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productimg != null">
+        productimg = #{productimg,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="productdetail != null">
+        productdetail = #{productdetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlyznbxhf.po.Product">
+    update product
+    set productname = #{productname,jdbcType=VARCHAR},
+      productimg = #{productimg,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=DOUBLE},
+      stock = #{stock,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      productdetail = #{productdetail,jdbcType=LONGVARCHAR}
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlyznbxhf.po.Product">
+    update product
+    set productname = #{productname,jdbcType=VARCHAR},
+      productimg = #{productimg,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=DOUBLE},
+      stock = #{stock,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER}
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+</mapper>
