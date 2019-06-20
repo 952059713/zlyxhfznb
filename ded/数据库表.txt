@@ -1,0 +1,59 @@
+create  database dbshop0620;
+use dbshop0620;
+
+create table user(
+  userid int auto_increment primary key comment '用户id',
+  userimg varchar(50) comment '头像',
+  username varchar(50) unique  comment '用户名',
+  password varchar(50) not null  comment '密码',
+  balance double not null comment '余额',
+  phone varchar(50) comment '手机'
+);
+
+show create table user;
+
+create table product(
+  productid int auto_increment primary key comment '商品id',
+  productname varchar(50) not null comment '商品名',
+  productimg varchar(50) not null comment '商品图片',
+  productdetail text not null comment '商品详情',
+  price double not null comment '商品价格',
+  discount double comment '折扣',
+  stock int not null comment 'kucun',
+  sales int not null comment '销量'
+);
+drop table product;
+
+create table orders(
+  orderid int primary key auto_increment comment '订单id',
+  totalprice double not null comment '总金额',
+  totalnum int not null comment '总数量',
+  userid int not null comment '用户id',
+  addressid int not null comment '地址id',
+  status int not null comment '状态'
+);
+
+create table orderdetail(
+  orderdetailid int auto_increment primary key comment '订单详情id',
+  orderid int not null comment '订单id',
+  productid int not null comment '商品id',
+  productnum int not null comment '商品数量',
+  productprice double not null comment '商品价格'
+);
+
+create table address(
+  addressid int auto_increment primary key comment '地址id',
+  userid int not null comment '用户id',
+  addressdetail varchar(200) comment '地址详情',
+  province varchar(50) comment '省',
+  city varchar(50) comment '市',
+  county varchar(50) comment '区'
+);
+
+create table shoppingcart(
+  shoppingcartid int auto_increment primary key comment '购物车id',
+  productid int not null comment '商品id',
+  productnum int not null comment '商品数量',
+  userid  int not null comment '用户id',
+  status int not null comment '状态'
+);
