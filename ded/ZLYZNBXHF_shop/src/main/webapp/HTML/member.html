@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>会员中心</title>
@@ -13,7 +13,7 @@
 
 <div class="top">
 	<div class="w1200">
-		<div class="left">您好，欢迎光临易易城！<a href="#">[登录]</a> <a href="#">[注册]</a></div>
+		<div class="left">您好，欢迎光临易易城！<a href="">[登录]</a> <a href="#">[注册]</a></div>
         <div class="right"><a href="#">我的会员中心</a>|<a href="#">收藏夹</a>|<a href="#">服务中心</a>|<a href="#">在线客服</a>|<a href="shopcar.html">购物车<b>0</b>件</a></div>
         <div class="clear"></div>
     </div>
@@ -99,18 +99,13 @@
                 <dd>
 					<table width="725" border="0" cellpadding="0" cellspacing="0">
                       <tr>
-                        <td width="416" class="td01">尊敬的，<font>张三</font> 您好！<span>(普通会员)</span></td>
-                        <td width="44">余额：</td>
-                        <td width="122"><span>0.000元</span></td>
-                        <td width="56" align="right">可用：</td>
-                        <td width="87"><span>0.000元</span></td>
+                        <td width="416" class="td01">尊敬的，<span class="username"></span> 您好！<span>(普通会员)</span></td>
+                        <td width="44">余额：<span class="balance"></span></td>
                       </tr>
                       <tr>
                         <td>还没有上传头像？ 点击<a href="#">上传头像</a><a class="save" href="#">保存</a></td>
-                        <td>冻结：</td>
-                        <td><span>0.000元</span></td>
-                        <td align="right">已提现：</td>
-                        <td><span>0.000元</span></td>
+                        <td>手机：</td>
+                        <td><span class="phone"></span></td>
                       </tr>
                     </table>
                     <img src="images/face.jpg"/>
@@ -121,24 +116,10 @@
                 	<span>个人资料</span>
                 </dt>
                 <dd>
-                	<div class="item"><span><font>*</font>用户真实姓名：</span><input type="tex" class="txt"/></div>
-                    <div class="item"><span><font>*</font>用户身份证号码：</span><input type="tex" class="txt"/></div>
-                    <div class="item"><span><font>*</font>性别：</span><input type="radio" value="" name="sex"/> 男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="" name="sex"/> 女</div>
-                	<div class="item"><span style="float:left"><font>*</font>开户行：</span>
-                     <div class="xlc"><input name="aaa" class="txt-xl li01" value="储蓄卡|213213"/><span>更换银行 V</span>
-                          <ul>
-                              <li class="li01">储蓄卡|111111</li>
-                              <li class="li02">储蓄卡|222222</li>
-                              <li class="li03">储蓄卡|213213</li>
-                          </ul>
-                      </div>
-                      <div class="clear"></div>
-                     </div>
-                     <div class="item"><span><font>*</font>开户人姓名：</span><input type="tex" class="txt"/></div>
-                     <div class="item"><span><font>*</font>银行卡号：</span><input type="tex" class="txt"/></div>
-                     <div class="item"><span><font>*</font>电子邮箱：</span><input type="tex" class="txt"/> <em>请输入邮箱地址，邮箱将用于找回密码。</em></div>
-                     <div class="item"><span><font>*</font>联系地址：</span><select><option value="广东省">广东省</option></select><select><option value="深圳市">深圳市</option></select><input type="tex" class="txt"/></div>
-                     <div class="item"><input type="submit" class="sub" value="保存"/></div>
+                    <div class="item"><span><font>*</font>用户名：</span><span class="username" readonly type="tex" class="txt"></span></div>
+                    <div class="item"><span><font>*</font>余额：</span><span class="balance" readonly type="tex" class="txt"/></span></div>
+                    <div class="item"><span><font>*</font>手机号：</span><span class="phone" type="tex" class="txt"/></span></div>
+                    <div class="item"><input type="submit" class="sub" value="保存"/></div>
                 </dd>
             </dl>
         </div>
@@ -237,4 +218,41 @@
 
 
 </body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/md5.js"></script>
+<script>
+    var username = sessionStorage.getItem("username");
+    $(".username").html(username);
+
+
+    getUserByName();
+    //通过部门ID，获取部门信息
+    function getUserByName() {
+        $.ajax({
+            url:"../user/getUser.action",
+            type:"POST",
+            data:{
+                username:username
+            },
+            success:function (result) {
+
+                if(result.code ==0){
+                    handleModifyFullValue(result.data)
+                    alert()
+                }else {
+                    alert(result.msg)
+                }
+            },
+            error:function (error) {
+                alert(error)
+            }
+        })
+    }
+    //获取部门信息之后，将信息展示到输入框
+    function handleModifyFullValue(data) {
+        $(".username").html(data.username);
+        $(".balance").html(data.balance);
+        $(".phone").html(data.phone);
+    }
+</script>
 </html>

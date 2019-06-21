@@ -23,8 +23,7 @@
     where userid = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zlyznbxhf.po.User">
-    insert into user (userid, userimg, username, 
-      password, balance, phone
+    insert into user (userid, userimg, username,password, balance, phone
       )
     values (#{userid,jdbcType=INTEGER}, #{userimg,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, #{phone,jdbcType=VARCHAR}
@@ -103,4 +102,8 @@
       phone = #{phone,jdbcType=VARCHAR}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByName" parameterType="String" resultType="User">
+    select *from user where username = #{username}
+  </select>
 </mapper>

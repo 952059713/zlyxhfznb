@@ -7,41 +7,41 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <!--扫描控制器-->
-    <context:component-scan base-package="com.huadian.controller"></context:component-scan>
+    <context:component-scan base-package="com.zlyznbxhf.controller"></context:component-scan>
 
-    <!--注解确定-->
-    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+    <!--&lt;!&ndash;注解确定&ndash;&gt;-->
+    <!--<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>-->
 
-    <!--配置converter转换器，转换工程-->
-    <bean name="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <property name="converters">
-            <list>
-                <bean class="com.huadian.converter.DateConverter"></bean>
-            </list>
-        </property>
-    </bean>
+    <!--&lt;!&ndash;配置converter转换器，转换工程&ndash;&gt;-->
+    <!--<bean name="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+        <!--<property name="converters">-->
+            <!--<list>-->
+                <!--<bean class="com.huadian.converter.DateConverter"></bean>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
-    <!--<mvc:annotation-driven>-->
-        <!--<mvc:message-converters>-->
-            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-                <!--<property name="supportedMediaTypes">-->
-                    <!--<list>-->
-                        <!--<value>application/json;charset=utf-8</value>-->
-                        <!--<value>test/json;charset=utf-8</value>-->
-                    <!--</list>-->
-                <!--</property>-->
-                <!--<property name="objectMapper">-->
-                    <!--<bean class="com.fasterxml.jackson.databind.ObjectMapper">-->
-                        <!--<property name="dateFormat">-->
-                            <!--<bean class="java.text.SimpleDateFormat">-->
-                                <!--<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"></constructor-arg>-->
-                            <!--</bean>-->
-                        <!--</property>-->
-                    <!--</bean>-->
-                <!--</property>-->
-            <!--</bean>-->
-        <!--</mvc:message-converters>-->
-    <!--</mvc:annotation-driven>-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=utf-8</value>
+                        <value>test/json;charset=utf-8</value>
+                    </list>
+                </property>
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"></constructor-arg>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 
     <!--&lt;!&ndash;文件上传，name必须等于multipartResolver&ndash;&gt;-->

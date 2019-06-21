@@ -12,7 +12,7 @@
     <!--dataSource:C3P0连接池-->
     <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssm0614?characterEncoding=UTF-8"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/dbshop0620?characterEncoding=UTF-8"></property>
         <property name="user" value="root"></property>
         <property name="password" value="123"></property>
     </bean>
@@ -44,9 +44,9 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
         <!--指定扫描的包，如果扫描多个包，每个包之前用半角的逗号分隔-->
-        <property name="basePackage" value="com.huadian.mapper"></property>
+        <property name="basePackage" value="com.zlyznbxhf.mapper"></property>
     </bean>
 
-    <context:component-scan base-package="com.huadian"></context:component-scan>
+    <context:component-scan base-package="com.zlyznbxhf"></context:component-scan>
 
 </beans>
