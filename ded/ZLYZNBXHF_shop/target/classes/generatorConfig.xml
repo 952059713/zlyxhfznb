@@ -26,59 +26,58 @@
         </javaTypeResolver>
 
         <!-- （3）数据表对应的model层  -->
-        <javaModelGenerator targetPackage="com.hd.po"
-                            targetProject="src/com/zlyznbxhf">
+        <javaModelGenerator targetPackage="com.zlyznbxhf.po"
+                            targetProject="src">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- (4)sql mapper 映射配置文件 -->
-        <sqlMapGenerator targetPackage="com.hd.mapper"
-                         targetProject="src/com/zlyznbxhf">
+        <sqlMapGenerator targetPackage="com.zlyznbxhf.mapper"
+                         targetProject="src">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- (5)mybatis3中的mapper接口 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.hd.mapper"
-                             targetProject="src/com/zlyznbxhf">
+                             targetPackage="com.zlyznbxhf.mapper"
+                             targetProject="src">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
         <!-- (5)数据表进行生成操作 schema:相当于库名; tableName:表名;
             domainObjectName:对应的DO
         -->
-        <table schema="mybatis" tableName="user" domainObjectName="User"
+        <table schema="dbshop0620" tableName="user" domainObjectName="User"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="mybatis" tableName="orders" domainObjectName="Orders"
+        <table schema="dbshop0620" tableName="orders" domainObjectName="Orders"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="mybatis" tableName="address" domainObjectName="Address"
+        <table schema="dbshop0620" tableName="address" domainObjectName="Address"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="mybatis" tableName="orderdetail" domainObjectName="OrderDetail"
+        <table schema="dbshop0620" tableName="orderdetail" domainObjectName="OrderDetail"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="mybatis" tableName="product" domainObjectName="Product"
+        <table schema="dbshop0620" tableName="product" domainObjectName="Product"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="mybatis" tableName="shoppingcart" domainObjectName="ShoppingCart"
+        <table schema="dbshop0620" tableName="shoppingcart" domainObjectName="ShoppingCart"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-
 
 
     </context>

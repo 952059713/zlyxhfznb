@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 zhuliyang 
 addsdgfhjg
+=======
+zhuliyang is sb
+>>>>>>> parent of 933fb00... Update zly.txt
