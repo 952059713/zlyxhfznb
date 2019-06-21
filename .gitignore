@@ -22,3 +22,6 @@ ZLYZNBXHF_shop.iml
 *.tar.gz
 *.rar
 *.xml
+sqlMapconfig.xml
+springmvc.xml
+applicationContext.xml

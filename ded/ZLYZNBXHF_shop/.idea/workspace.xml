@@ -232,9 +232,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="215" />
-    <option name="y" value="77" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="53" />
+    <option name="y" value="86" />
     <option name="width" value="1582" />
     <option name="height" value="1047" />
   </component>
@@ -387,7 +387,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561131369513" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561131623867" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -512,16 +512,15 @@
       <updated>1561023033448</updated>
       <workItem from="1561023039629" duration="3190000" />
       <workItem from="1561037028081" duration="642000" />
-      <workItem from="1561078062663" duration="31454000" />
+      <workItem from="1561078062663" duration="31457000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35286000" />
+    <option name="totallyTimeSpent" value="35289000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="172" y="62" width="1265" height="837" extended-state="1" />
-    <editor active="true" />
+    <frame x="43" y="69" width="1265" height="837" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49811321" visible="true" weight="0.31483015" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
