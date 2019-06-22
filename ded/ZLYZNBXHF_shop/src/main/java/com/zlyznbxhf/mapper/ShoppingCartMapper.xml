@@ -90,4 +90,19 @@
       status = #{status,jdbcType=INTEGER}
     where shoppingcartid = #{shoppingcartid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCartByUser" parameterType="int" resultMap="ProductResultMap">
+    select shoppingcartid,productid,productnum
+    from shoppingcart
+     where userid=#{userid}
+  </select>
+
+  <resultMap id="ProductResultMap" type="com.zlyznbxhf.vo.ShopCartProduct">
+    <id column="shoppingcartid" jdbcType="INTEGER" property="shoppingcartid" />
+    <result column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="productnum" jdbcType="INTEGER" property="productnum" />
+    <association property="product" column="productid"
+                 select="com.zlyznbxhf.mapper.ProductMapper.selectByPrimaryKey">
+    </association>
+  </resultMap>
 </mapper>

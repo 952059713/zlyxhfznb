@@ -1,5 +1,8 @@
 package com.zlyznbxhf.po;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ShoppingCart {
     private Integer shoppingcartid;
 
@@ -49,5 +52,16 @@ public class ShoppingCart {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "shoppingcartid=" + shoppingcartid +
+                ", productid=" + productid +
+                ", productnum=" + productnum +
+                ", userid=" + userid +
+                ", status=" + status +
+                '}';
     }
 }

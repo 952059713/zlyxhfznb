@@ -1,6 +1,9 @@
 package com.zlyznbxhf.mapper;
 
 import com.zlyznbxhf.po.ShoppingCart;
+import com.zlyznbxhf.vo.ShopCartProduct;
+
+import java.util.List;
 
 public interface ShoppingCartMapper {
     int deleteByPrimaryKey(Integer shoppingcartid);
@@ -14,4 +17,5 @@ public interface ShoppingCartMapper {
     int updateByPrimaryKeySelective(ShoppingCart record);
 
     int updateByPrimaryKey(ShoppingCart record);
+    List<ShopCartProduct> selectCartByUser(Integer userid);
 }

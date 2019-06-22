@@ -39,6 +39,10 @@ public class UserServiceImpl implements UserService {
             result.put("msg","登陆成功");
             result.put("data",user1);
         }
+        else {
+            result.put("code",1);
+            result.put("msg","密码错误");
+        }
         return result;
     }
 

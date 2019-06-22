@@ -1,5 +1,8 @@
 package com.zlyznbxhf.po;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Orders {
     private Integer orderid;
 

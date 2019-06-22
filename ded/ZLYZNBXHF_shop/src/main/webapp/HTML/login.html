@@ -44,16 +44,16 @@
 <script src="../js/jquery-1.9.1.min.js"></script>
 <script src="js/md5.js"></script>
 <script>
-    var password = $("#password").val();
     $("#button").click(function () {
+        var password = $("#password").val();
         var username = $("#username").val();
-        var mdpassword = password;
+        var mdpassword = hex_md5(password);
         sessionStorage.setItem("username",$("#username").val());
         $.ajax({
             url:"../md5/m5d.action",
             data:{
                 username:username,
-                password:hex_md5(mdpassword),
+                password:mdpassword,
             },
             type:"POST",
             success:function (result) {

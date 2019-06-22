@@ -75,7 +75,7 @@
       	<dl>
         	<dt><span>我的购物车</span></dt>
             <dd>
-            	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+            	<table  width="100%" cellpadding="0" cellspacing="0" border="0">
                   <tr class="tr_t">
                     <td width="4%"><input type="checkbox" checked="checked"/></td>
                     <td width="4%">全选</td>
@@ -85,43 +85,19 @@
                     <td width="14%">小计</td>
                     <td width="11%">操作</td>
                   </tr>
-                  <tr class="tr_c">
-                    <td><input type="checkbox" checked="checked"/></td>
-                    <td colspan="2">
-                    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                          <tr>
-                            <td width="15%"><img src="images/ico23.jpg"/></td>
-                            <td width="85%"><a href="#" class="title">头层牛皮真皮沙发 客厅家具 FPSF0814 进口中厚皮 双人位+单人位+贵妃位</a></td>
-                          </tr>
-                        </table>
-                    </td>
-                    <td class="price">￥3083.00</td>
-                    <td><span class="jian">-</span><input type="text" value="1"/><span class="jia">+</span></td>
-                    <td class="price">￥3083.00</td>
-                    <td><a href="#">删除</a></td>
-                  </tr>
-                  <tr class="tr_c">
-                    <td><input type="checkbox" checked="checked"/></td>
-                    <td colspan="2">
-                    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                          <tr>
-                            <td width="15%"><img src="images/ico23.jpg"/></td>
-                            <td width="85%"><a href="#" class="title">头层牛皮真皮沙发 客厅家具 FPSF0814 进口中厚皮 双人位+单人位+贵妃位</a></td>
-                          </tr>
-                        </table>
-                    </td>
-                    <td class="price">￥3083.00</td>
-                    <td><span class="jian">-</span><input type="text" value="1"/><span class="jia">+</span></td>
-                    <td class="price">￥3083.00</td>
-                    <td><a href="#">删除</a></td>
-                  </tr>
+
+                    <tbody id="productList">
+
+                    </tbody>
+
+
                   <tr class="tr_d">
                     <td colspan="7">
                     	<table width="100%" border="0" cellspacing="0" cellpadding="0">
                           <tr>
                             <td width="75%"><span class="del"><a href="#">删除选中商品</a></span></td>
-                            <td width="11%">已选商品  <strong>1</strong>  件</td>
-                            <td width="14%" class="all_price">合计：<font>￥3083.00</font></td>
+                            <td width="11%">已选商品  <strong id="totalCount">1</strong>  件</td>
+                            <td width="14%" class="all_price">合计：<span class="size:100px " id="totalPrice">3083.00</span></td>
                           </tr>
                         </table>
                     </td>
@@ -233,4 +209,162 @@
 
 
 </body>
+
+<!--<tr class="tr_c">-->
+    <!--<td><input type="checkbox" checked="checked"/></td>-->
+    <!--<td colspan="2">-->
+        <!--<table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+            <!--<tr>-->
+                <!--<td width="15%"><img src="images/ico23.jpg"/></td>-->
+                <!--<td width="85%"><a href="#" class="title">头层牛皮真皮沙发 客厅家具 FPSF0814 进口中厚皮 双人位+单人位+贵妃位</a></td>-->
+            <!--</tr>-->
+        <!--</table>-->
+    <!--</td>-->
+    <!--<td class="price">￥3083.00</td>-->
+    <!--<td><span class="jian">-</span><input type="text" value="1"/><span class="jia">+</span></td>-->
+    <!--<td class="price">￥3083.00</td>-->
+    <!--<td><a href="#">删除</a></td>-->
+<!--</tr>-->
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script>
+    var cartList;
+    getShopCartList();
+    function getShopCartList() {
+        $.ajax({
+            url: "../shoppingcart/getUserShoppingCar.action",
+            type: "GET",
+            success: function (result) {
+                if (result.code == "0") {
+                    cartList = result.data;
+                    handleProductList(result.data);
+                }
+            }, error: function (error) {
+                alert(error)
+            }
+        })
+    }
+
+    function handleProductList(list) {
+        var row=
+            '  <tr class="tr_c" >    ' +
+
+            '        <td> <input    type="checkbox" checked="checked" class="pId" value="&&pid" /> </td>\n' +
+            '\n' +
+            '                    <td colspan="2">\n' +
+            '\n' +
+            '                    \t<table width="100%" border="0" cellspacing="0" cellpadding="0">\n' +
+            '\n' +
+            '                          <tr>\n' +
+            '                            <td width="15%"><img src="&&img_url"/></td>\n' +
+            '                            <td width="85%"><a href="#" class="title">&&name</a></td>\n' +
+            '                          </tr>\n' +
+            '                        </table>\n' +
+            '                    </td>\n' +
+            '                    <td class="price">&&price</td>\n' +
+            '                    <td><span class="jian">-</span><input type="text" class="pCount" value="&&count"/><span class="jia">+</span></td>\n' +
+            '                    <td class="price">&&allprice</td>\n' +
+            '           <td><a href="#" class="deleteOne">删除 </a></td>\n' +
+            ' </tr>   ' +
+            '';
+        var totalPrice=0 ;
+        var allhtml="";
+        for (var i = 0; i <list.length ; i++) {
+            var shopcart=list[i];
+            var product=shopcart.product;
+            var row_=row.replace("&&pid",shopcart.shoppingcartid);
+            row_=row_.replace("&&img_url",product.productimg);
+            row_=row_.replace("&&name",product.productname);
+            row_=row_.replace("&&price",product.price);
+            row_=row_.replace("&&count",shopcart.productnum);
+            row_=row_.replace("&&allprice",product.price*shopcart.productnum*1.0);
+            totalPrice+=product.price*shopcart.productnum*1.0;
+            allhtml+=row_;
+        }
+        $("#productList").html(allhtml);
+        $("#totalCount").text(list.length);
+        $("#totalPrice").text(totalPrice);
+    }
+
+    function updateCount(pId,productnum)
+    {
+        $.ajax({
+            url:"../shoppingcart/updateShoppingCar.action",
+            type:"POST",
+            data:{
+                shoppingcartid:pId,
+                productnum:productnum
+            },
+            success:function (result) {
+                if (result.code=="0")
+                {
+                    alert("修改成功")
+                }
+                else {
+                    getShopCartList();
+                }
+            },
+            error:function (error) {
+                alert(error);
+            }
+        })
+
+    }
+
+    //数量减少
+    $("#productList").on("click",".jian",function () {
+        var ProductNumber=0;
+        ProductNumber=  $(this).next().val()-1;
+        var pId=$(this).parent().parent().children().eq(0).children(":input.pId").val();
+        if(ProductNumber==0)
+        {
+            //删除
+            batchDelete(pId)
+        }else {
+            $(this).next().val(ProductNumber);
+            updateCount(pId,ProductNumber);
+        }
+    });
+
+    //数量增加
+    $("#productList").on("click",".jia",function () {
+        var ProductNumber=0;
+        ProductNumber=1+Number($(this).prev().val());
+        var pId=$(this).parent().parent().children().eq(0).children(":input.pId").val();
+
+        $(this).prev().val(ProductNumber);
+        updateCount(pId,ProductNumber);
+    });
+
+    //删除
+    $("#productList").on("click",".deleteOne",function () {
+        var pId=$(this).parent().parent().children().eq(0).children(":input.pId").val();
+        batchDelete(pId)
+    });
+    //移除购物车中的商品
+    function batchDelete(pIds) {
+        $.ajax({
+            url:"../shoppingcart/deleteShoppingCar.action",
+            data:{
+                shoppingcartid:pIds
+            },
+            traditional: true,  //解决传递数组的问题
+            success:function (result) {
+                if (result.code=="0")
+                {
+                    console.log("全部移除成功");
+                    getShopCartList();
+                }
+                else {
+                    console.log("移除出错")
+                }
+            },
+            error:function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+
+</script>
 </html>

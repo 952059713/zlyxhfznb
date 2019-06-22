@@ -1,5 +1,8 @@
 package com.zlyznbxhf.po;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Product {
     private Integer productid;
 
@@ -79,5 +82,19 @@ public class Product {
 
     public void setProductdetail(String productdetail) {
         this.productdetail = productdetail == null ? null : productdetail.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productid=" + productid +
+                ", productname='" + productname + '\'' +
+                ", productimg='" + productimg + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", stock=" + stock +
+                ", sales=" + sales +
+                ", productdetail='" + productdetail + '\'' +
+                '}';
     }
 }

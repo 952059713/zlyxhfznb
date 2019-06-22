@@ -1,5 +1,8 @@
 package com.zlyznbxhf.po;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Address {
     private Integer addressid;
 

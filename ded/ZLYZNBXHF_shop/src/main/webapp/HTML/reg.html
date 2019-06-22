@@ -47,8 +47,9 @@
 <script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/md5.js"></script>
 <script>
-    var mdpassword = $("#password").val();
+
     $("#button").click(function () {
+        var mdpassword = $("#password").val();
         $.ajax({
             url:"../user/register.action",
             data:{
