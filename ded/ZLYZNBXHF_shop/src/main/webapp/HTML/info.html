@@ -315,6 +315,7 @@
             totalPrice+=product.price*cart.productnum*1.0;
             allhtml+=row_;
         }
+        sessionStorage.setItem("totalPrice",totalPrice);
         $("#CheckCartList").html(allhtml);
         $("#all_price").text(totalPrice);
     }
@@ -407,9 +408,8 @@
             success:function (result) {
                 if (result.code=="0")
                 {
-                    console.log("全部移除成功");
+                    alert(result.msg);
                     getAddressList();
-
                 }
                 else {
                     console.log("移除出错")

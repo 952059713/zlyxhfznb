@@ -72,7 +72,7 @@
     
     <div class="payply">
     	<div class="pay_lc"><span class="sp01">我的购物车</span><span class="sp02">填写提交信息表单</span><span class="sp03">在线支付</span></div>
-        <div class="pay_w"><img src="images/ico13.jpg"/><p>订单已提交成功，订单号YYC20150920175695，请您尽快完成付款！<br />应付款：<font>3083.00元</font></p></div>
+        <div class="pay_w"><img src="images/ico13.jpg"/><p>订单已提交成功，订单号YYC20150920175695，请您尽快完成付款！<br />应付款：<span id="price">3083.00元</span></p></div>
         <dl>
         	<dt><span>请选择您的支付方式</span></dt>
             <dd>
@@ -186,7 +186,10 @@
         <li><a href="#" class="a04"></a></li>
     </ul>
 </div>
-
-
+<script src="js/jquery-1.9.1.min.js"></script>
+<script >
+    var totalprice = sessionStorage.getItem("totalPrice");
+    $("#price").html(totalprice);
+</script>
 </body>
 </html>
