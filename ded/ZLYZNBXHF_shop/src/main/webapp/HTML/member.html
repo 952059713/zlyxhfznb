@@ -57,7 +57,7 @@
                 </ul>
             </div>
         </div>
-    	<div class="item"><a href="#" class="home">商城首页</a></div>
+    	<div class="item"><a href="product.html" class="home">商城首页</a></div>
         <div class="item"><a href="#">易易特色</a></div>
         <div class="item"><a href="#">热销产品</a></div>
         <div class="item"><a href="#">新品上市</a></div>
@@ -105,10 +105,16 @@
                       <tr>
                         <td>还没有上传头像？ 点击<a href="#">上传头像</a><a class="save" href="#">保存</a></td>
                         <td>手机：</td>
-                        <td><span class="phone"></span></td>
+                        <td><span id="phone1"></span></td>
                       </tr>
                     </table>
-                    <img src="images/face.jpg"/>
+                    <img height="118" width="117" src="" id="face_img"/>
+                    <div id="file_upload" style="display: none;">
+                        <form method="post" action="#" id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" name="multipartFile" >
+                            <input type="button" id="uploadBtn" value="提交">
+                        </form>
+                    </div>
                 </dd>
             </dl>
             <dl class="dl02">
@@ -118,8 +124,8 @@
                 <dd>
                     <div class="item"><span><font>*</font>用户名：</span><span class="username" readonly type="tex" class="txt"></span></div>
                     <div class="item"><span><font>*</font>余额：</span><span class="balance" readonly type="tex" class="txt"/></span></div>
-                    <div class="item"><span><font>*</font>手机号：</span><span class="phone" type="tex" class="txt"/></span></div>
-                    <div class="item"><input type="submit" class="sub" value="保存"/></div>
+                    <div class="item"><span><font>*</font>手机号：</span><input class="phone" type="text"></div>
+                    <div class="item"><input type="submit" id="save" value="保存"/></div>
                 </dd>
             </dl>
         </div>
@@ -209,7 +215,7 @@
 <!--float_right-->
 <div class="float">
 	<ul>
-    	<li><a href="#" class="a01"></a></li>
+    	<li><a href="shopcar.html" class="a01"></a></li>
         <li><a href="#" class="a02"></a></li>
         <li><a href="#" class="a03"></a></li>
         <li><a href="#" class="a04"></a></li>
@@ -226,7 +232,7 @@
 
 
     getUserByName();
-    //通过部门ID，获取部门信息
+    //通过用户名获取用户信息
     function getUserByName() {
         $.ajax({
             url:"../user/getUser.action",
@@ -248,11 +254,48 @@
             }
         })
     }
-    //获取部门信息之后，将信息展示到输入框
+    //获取用户信息之后，将信息展示到输入框
     function handleModifyFullValue(data) {
+        $("#face_img").attr('src',data.userimg);
         $(".username").html(data.username);
         $(".balance").html(data.balance);
-        $(".phone").html(data.phone);
+        $("#phone1").html(data.phone);
+        $(".phone").val(data.phone);
     }
+
+
+    /*
+      *点击头像上传
+     */
+    $("#face_img").click(function () {
+        $("#file_upload").toggle();
+    });
+
+    /**
+     * 文件上传
+     */
+    $("#uploadBtn").click(function () {
+        var formData = new FormData($("#uploadForm")[0])
+        $.ajax({
+            url:"../file/fileUploadTest.action",
+            type:"POST",
+            data:formData,
+            async:false,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success:function (result) {
+                if(result.code ==0){
+                    $("#file_upload").toggle();
+                    $("#face_img").attr('src',result.data);
+                }else {
+                    alert("请登录");
+                }
+            },
+            error:function (error) {
+                console.log("error:"+error);
+            }
+        })
+    })
 </script>
 </html>

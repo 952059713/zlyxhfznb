@@ -44,10 +44,10 @@
     </mvc:annotation-driven>
 
 
-    <!--&lt;!&ndash;文件上传，name必须等于multipartResolver&ndash;&gt;-->
-    <!--<bean name="multipartResolver"-->
-          <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-        <!--&lt;!&ndash;设置文件大小：单位字节&ndash;&gt;-->
-        <!--<property name="maxUploadSize" value="5000000"></property>-->
-    <!--</bean>-->
+    <!--文件上传，name必须等于multipartResolver-->
+    <bean name="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置文件大小：单位字节-->
+        <property name="maxUploadSize" value="5000000"></property>
+    </bean>
 </beans>

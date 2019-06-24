@@ -17,5 +17,9 @@ public interface ShoppingCartMapper {
     int updateByPrimaryKeySelective(ShoppingCart record);
 
     int updateByPrimaryKey(ShoppingCart record);
+
     List<ShopCartProduct> selectCartByUser(Integer userid);
+
+    ShopCartProduct selectById(Integer id);
+
 }

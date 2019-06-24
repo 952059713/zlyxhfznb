@@ -2,6 +2,8 @@ package com.zlyznbxhf.mapper;
 
 import com.zlyznbxhf.po.Product;
 
+import java.util.List;
+
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer productid);
 
@@ -16,6 +18,14 @@ public interface ProductMapper {
     int updateByPrimaryKeyWithBLOBs(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> showProductList();
+
+    List<Product> exploreKeyword(String productname);
+
+    List<Product> findProductList();
+
+    Product getProductById(Integer productid);
 
 
 }

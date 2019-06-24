@@ -2,6 +2,8 @@ package com.zlyznbxhf.mapper;
 
 import com.zlyznbxhf.po.Address;
 
+import java.util.List;
+
 public interface AddressMapper {
     int deleteByPrimaryKey(Integer addressid);
 
@@ -14,4 +16,5 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address record);
 
     int updateByPrimaryKey(Address record);
+    List<Address> selectById(Integer userid);
 }

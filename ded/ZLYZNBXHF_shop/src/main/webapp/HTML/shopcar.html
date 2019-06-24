@@ -232,7 +232,7 @@
     getShopCartList();
     function getShopCartList() {
         $.ajax({
-            url: "../shoppingcart/getUserShoppingCar.action",
+            url: "../user/getUserShoppingCar.action",
             type: "GET",
             success: function (result) {
                 if (result.code == "0") {
@@ -289,7 +289,7 @@
     function updateCount(pId,productnum)
     {
         $.ajax({
-            url:"../shoppingcart/updateShoppingCar.action",
+            url:"../user/updateShoppingCar.action",
             type:"POST",
             data:{
                 shoppingcartid:pId,
@@ -344,7 +344,7 @@
     //移除购物车中的商品
     function batchDelete(pIds) {
         $.ajax({
-            url:"../shoppingcart/deleteShoppingCar.action",
+            url:"../user/deleteShoppingCar.action",
             data:{
                 shoppingcartid:pIds
             },
@@ -365,6 +365,20 @@
         })
     }
 
+    //点击结算  将选中的商品ids存入到session中
+    $(".code").click(function () {
+
+        var cartIds = [];
+        //给每一个选中的标签都绑定一个方法
+        $("input.pId:checked").each(function(i){
+            //将标签的值放入数组中
+            cartIds[i]=$(this).val();
+            //此处添加不能使用add  add不是一个function
+        });
+
+        sessionStorage.setItem("cartIds",cartIds);
+        location.href="info.html";
+    });
 
 </script>
 </html>

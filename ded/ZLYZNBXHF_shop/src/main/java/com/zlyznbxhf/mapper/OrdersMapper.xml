@@ -23,6 +23,11 @@
     where orderid = #{orderid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zlyznbxhf.po.Orders">
+
+    <selectKey keyProperty="orderid" resultType="int" order="AFTER">
+      select LAST_INSERT_ID()
+    </selectKey>
+
     insert into orders (orderid, totalprice, totalnum, 
       userid, addressid, status
       )

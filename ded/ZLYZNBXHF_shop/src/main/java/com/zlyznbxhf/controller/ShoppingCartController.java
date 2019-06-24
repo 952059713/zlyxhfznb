@@ -20,17 +20,17 @@ public class ShoppingCartController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/shoppingcart/getUserShoppingCar.action")
+    @RequestMapping(value = "/user/getUserShoppingCar.action")
     @ResponseBody
     public JSONObject getCustomerShoppingCar(HttpSession session){
-//        Integer id = (Integer) session.getAttribute("id");
-        Integer id = 8;
-        JSONObject cartList = shoppingCartService.getCartList(id);
+        Integer userid = (Integer) session.getAttribute("userid");
+//        Integer id = 8;
+        JSONObject cartList = shoppingCartService.getCartList(userid);
         return cartList;
     }
 
     //删除
-    @RequestMapping(value = "/shoppingcart/deleteShoppingCar.action")
+    @RequestMapping(value = "/user/deleteShoppingCar.action")
     @ResponseBody
     public JSONObject deleteShoppingCar(Integer[] shoppingcartid){
         System.out.println(shoppingcartid);
@@ -39,10 +39,17 @@ public class ShoppingCartController {
     }
 
     //更新购物车
-    @RequestMapping(value = "/shoppingcart/updateShoppingCar.action")
+    @RequestMapping(value = "/user/updateShoppingCar.action")
     @ResponseBody
     public JSONObject updateShoppingCar(Integer shoppingcartid,Integer productnum){
         JSONObject result = shoppingCartService.updateCart(shoppingcartid,productnum);
         return result;
+    }
+
+    @RequestMapping(value = "/cart/getorderscart.action")
+    @ResponseBody
+    public JSONObject getOrderCartList(Integer[] ids){
+        JSONObject list = shoppingCartService.getOrderCartList(ids);
+        return list;
     }
 }

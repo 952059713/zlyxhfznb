@@ -97,6 +97,12 @@
      where userid=#{userid}
   </select>
 
+  <select id="selectById" parameterType="int" resultMap="ProductResultMap">
+    select productid,productnum
+    from shoppingcart
+  where shoppingcartid = #{shoppingcartid}
+  </select>
+
   <resultMap id="ProductResultMap" type="com.zlyznbxhf.vo.ShopCartProduct">
     <id column="shoppingcartid" jdbcType="INTEGER" property="shoppingcartid" />
     <result column="productid" jdbcType="INTEGER" property="productid" />

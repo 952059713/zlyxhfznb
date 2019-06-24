@@ -10,6 +10,7 @@ import com.zlyznbxhf.vo.ShopCartProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +23,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public JSONObject addToCart(ShoppingCart shoppingCart) {
-        return null;
+        JSONObject jsonObject = new JSONObject();
+        int i = shoppingCartMapper.insertSelective(shoppingCart);
+        if (i==1){
+            jsonObject.put("code",0);
+            jsonObject.put("msg","添加成功");
+        }
+        else {
+            jsonObject.put("code",1);
+            jsonObject.put("msg","添加失败");
+        }
+
+        return jsonObject;
     }
 
     @Override
@@ -73,6 +85,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 jsonObject.put("msg","数量更新失败");
             }
         }
+        return jsonObject;
+    }
+
+    @Override
+    public JSONObject getOrderCartList(Integer[] ids) {
+        List<ShopCartProduct> shopCartProducts= new ArrayList<>();
+        for(int i =0 ;i < ids.length;i++){
+            ShoppingCart shoppingCart1 = shoppingCartMapper.selectById(ids[i]);
+            shopCartProducts.add((ShopCartProduct) shoppingCart1);
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code",0);
+        jsonObject.put("msg","购物车结算");
+        jsonObject.put("data",shopCartProducts);
         return jsonObject;
     }
 

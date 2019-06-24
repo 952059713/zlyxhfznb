@@ -142,4 +142,17 @@
       sales = #{sales,jdbcType=INTEGER}
     where productid = #{productid,jdbcType=INTEGER}
   </update>
+
+  <select id="showProductList" resultType="Product">
+    select * from product
+  </select>
+  <select id="exploreKeyword" parameterType="String" resultType="Product">
+    select * from product where productname like '%'#{productname}'%'
+  </select>
+  <select id="findProductList" resultType="Product">
+  select * from product;
+  </select>
+  <select id="getProductById" parameterType="java.lang.Integer" resultType="Product">
+    select * from product where productid = #{productid}
+  </select>
 </mapper>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单展示</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <style>
+        #divCss5{
+            margin:0 auto;
+            border:0px solid #000;
+            width:900px;
+            height:500px
+        }
+        .divTest{
+            font-size: 20px;
+        }
+        #divCss6{
+            border-spacing:0px 20px;
+        }
+    </style>
+    <script src="js/jquery-1.7.min.js" type="text/javascript"></script>
+
+</head>
+
+<body class="index">
+<div class="top_ad"><div class="w1200"><a href="#" id="close"></a></div></div>
+
+
+<!--订单详情展示-->
+<div id="divCss5">
+    <table width="100%" border=1 id="divCss6">
+        <br><br><br>
+        <tr>
+            <th colspan="2" align="center" class="divTest">订单展示</th>
+        </tr>
+        <tr>
+            <td class="divTest">订单编号</td>
+            <td class="divTest"><input type="text" readonly id="orderid"></td>
+        </tr>
+        <tr>
+            <td class="divTest">用户</td>
+            <td class="divTest"><input type="text" readonly id="username"/></td>
+        </tr>
+        <tr>
+            <td class="divTest">地址信息</td>
+            <td class="divTest"><input type="text" readonly id="addressdetail"/></td>
+        </tr>
+        <tr>
+            <td class="divTest">购买数量</td>
+            <td class="divTest"><input type="text" readonly id="totalnum"/></td>
+        </tr>
+        <tr>
+            <td class="divTest">总金额</td>
+            <td class="divTest"><input type="text" readonly id="totalprice"/></td>
+        </tr>
+
+    </table>
+</div>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script>
+    var orderid = sessionStorage.getItem("orderid")||"";
+    var str = {orderid:1};
+    $.ajax({
+        url:"../orders/selectAllOrdersById.action",
+        type:"POST",
+        data:JSON.stringify(str),
+        contentType:"application/json;charset=utf-8",
+        success:function (list) {
+            show(list);
+        },
+        error:function (error) {
+            console.log(error);
+        }
+    });
+    //展示，通过id拿值（缺addressid）
+    function show(list) {
+        $("#orderid").val(list.orderid);
+        $("#username").val(sessionStorage.getItem("username"));
+        $("#addressdetail").val();
+        $("#totalnum").val(list.totalnum);
+        $("#totalprice").val(list.totalprice);
+
+    }
+</script>
+
+</body>
+</html>

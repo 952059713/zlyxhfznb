@@ -103,4 +103,10 @@
       county = #{county,jdbcType=VARCHAR}
     where addressid = #{addressid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectById" parameterType="int" resultMap="BaseResultMap">
+    select addressid,addressdetail,province,city,county
+    from address
+    where userid = #{userid}
+  </select>
 </mapper>

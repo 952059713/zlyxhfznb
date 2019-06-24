@@ -1,11 +1,14 @@
 package com.zlyznbxhf.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zlyznbxhf.mapper.UserMapper;
 import com.zlyznbxhf.po.User;
 import com.zlyznbxhf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @Service
@@ -30,6 +33,7 @@ public class UserServiceImpl implements UserService {
     public HashMap<String, Object> getUserByName(User user) {
 
         HashMap<String, Object> result = new HashMap<>();
+
         User user1 = userMapper.selectByName(user.getUsername());
         if (user1==null){
             result.put("code",2);
@@ -54,5 +58,29 @@ public class UserServiceImpl implements UserService {
         hashMap.put("msg","显示成功");
         hashMap.put("data",user);
         return hashMap;
+    }
+
+    @Override
+    public int updateUser(String username) {
+        int i = userMapper.updateByusername(username);
+        return i;
+    }
+
+    @Override
+    public JSONObject updateUserImg(Integer id, String img) {
+        User user = new User();
+        JSONObject jsonObject = new JSONObject();
+        user.setUserimg(img);
+        user.setUserid(id);
+        int i = userMapper.updateByPrimaryKeySelective(user);
+        if (i==1){
+            jsonObject.put("code",0);
+            jsonObject.put("msg","上传成功");
+        }
+        else {
+            jsonObject.put("code",1);
+            jsonObject.put("msg","上传失败");
+        }
+        return jsonObject;
     }
 }

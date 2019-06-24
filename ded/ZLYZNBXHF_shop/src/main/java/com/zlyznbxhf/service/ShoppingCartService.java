@@ -11,4 +11,6 @@ public interface ShoppingCartService {
     public  JSONObject deleteCart(Integer[] id);
 
     public  JSONObject updateCart(Integer id,Integer commodityNumber);
+
+    public JSONObject getOrderCartList(Integer[] ids);
 }
